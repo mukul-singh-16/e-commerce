@@ -10,7 +10,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 
-mongoose.connect(process.env.mongose_path)
+mongoose.connect("mongodb+srv://guptarajat2206:JrOxH5QFgzqNCelS@ecommerce.ghxjk8p.mongodb.net/?retryWrites=true&w=majority&appName=ecommerce")
     .then(() => console.log('DB Connected'))
     .catch((err) => console.log(err));
 

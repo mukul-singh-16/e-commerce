@@ -13,6 +13,15 @@ router.get('/products', async (req, res) => {
         res.status(500).render('error',{err:e.message})
     }
 });
+router.get('/', async (req, res) => {
+    
+    try {
+        res.render('home');
+    }
+    catch (e) {
+        res.status(500).render('error',{err:e.message})
+    }
+});
 
 
 router.get('/products/new',isLogedIn ,isseller, (req, res) => {
