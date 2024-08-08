@@ -10,9 +10,9 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 
-mongoose.connect("mongodb+srv://guptarajat2206:JrOxH5QFgzqNCelS@ecommerce.ghxjk8p.mongodb.net/?retryWrites=true&w=majority&appName=ecommerce")
-    .then(() => console.log('DB Connected'))
-    .catch((err) => console.log(err));
+// mongoose.connect("mongodb+srv://guptarajat2206:JrOxH5QFgzqNCelS@ecommerce.ghxjk8p.mongodb.net/?retryWrites=true&w=majority&appName=ecommerce")
+//     .then(() => console.log('DB Connected'))
+//     .catch((err) => console.log(err));
 
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
@@ -50,16 +50,16 @@ passport.deserializeUser(User.deserializeUser());
 passport.use(new LocalStrategy(User.authenticate())); 
 
 
-app.use((req, res, next) => {
+// app.use((req, res, next) => {
     
-    res.locals.currenturl='/products';
-    res.locals.currentUser = req.user;
-    res.locals.success = req.flash('success');
-    res.locals.error = req.flash('error');
+//     res.locals.currenturl='/products';
+//     res.locals.currentUser = req.user;
+//     res.locals.success = req.flash('success');
+//     res.locals.error = req.flash('error');
 
-    // console.log(res.locals.currentUser);
-    next();
-})
+//     // console.log(res.locals.currentUser);
+//     next();
+// })
 
 // console.log("appjs wala middleware");
 // console.log(session);
@@ -69,17 +69,17 @@ app.use((req, res, next) => {
 app.get('/',(req,res)=>{
     res.send("hello ji")
 })
-const productRoutes = require('./routes/product');
-const reviewRoutes = require('./routes/review');
-const authRouts = require('./routes/auth');
-const api=require('./routes/api');
-const cart=require('./routes/cart');
+// const productRoutes = require('./routes/product');
+// const reviewRoutes = require('./routes/review');
+// const authRouts = require('./routes/auth');
+// const api=require('./routes/api');
+// const cart=require('./routes/cart');
 
-app.use(authRouts);
-app.use(productRoutes);
-app.use(reviewRoutes);
-app.use(api);
-app.use(cart);
+// app.use(authRouts);
+// app.use(productRoutes);
+// app.use(reviewRoutes);
+// app.use(api);
+// app.use(cart);
 
 
 const port = 5000;
