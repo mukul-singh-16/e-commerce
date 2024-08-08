@@ -66,7 +66,7 @@ app.use((req, res, next) => {
 
 // Routes
 
-app.get('/',()=>{
+app.get('/',(req,res)=>{
     res.json({msg:"hello ji"})
 })
 const productRoutes = require('./routes/product');
