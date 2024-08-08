@@ -65,6 +65,10 @@ app.use((req, res, next) => {
 // console.log(session);
 
 // Routes
+
+app.get('/',()=>{
+    res.json({msg:"hello ji"})
+})
 const productRoutes = require('./routes/product');
 const reviewRoutes = require('./routes/review');
 const authRouts = require('./routes/auth');
