@@ -9,8 +9,10 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
+const MongoStore = require('connect-mongo');
+const dotenv=require('dotenv').config()
 
-mongoose.connect("mongodb+srv://guptarajat2206:JrOxH5QFgzqNCelS@ecommerce.ghxjk8p.mongodb.net/?retryWrites=true&w=majority&appName=ecommerce")
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log('DB Connected'))
     .catch((err) => console.log(err));
 
@@ -22,6 +24,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
 
+const mongooseConnection = mongoose.connection;
+
+
 
 const sessionConfig = {
     secret: 'weneedsomebettersecret',
@@ -31,7 +36,13 @@ const sessionConfig = {
         httpOnly: true,
         // expires: Date.now() + 1000* 60 * 60 * 24 * 7,
         maxAge:1000* 60 * 60 * 24 * 7 * 1
-    }
+    },
+    store: new MongoStore({ 
+    mongoUrl: process.env.MONGODB_URI, 
+    mongooseConnection,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }), // Use MongoDB to store sessions
 }  
 
 
@@ -61,8 +72,8 @@ app.use((req, res, next) => {
     next();
 })
 
-console.log("appjs wala middleware");
-console.log(session);
+// console.log("appjs wala middleware");
+// console.log(session);
 
 // Routes
 
