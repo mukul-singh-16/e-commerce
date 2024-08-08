@@ -67,7 +67,7 @@ app.use((req, res, next) => {
 // Routes
 
 app.get('/',(req,res)=>{
-    res.json({msg:"hello ji"})
+    res.send("hello ji")
 })
 const productRoutes = require('./routes/product');
 const reviewRoutes = require('./routes/review');
