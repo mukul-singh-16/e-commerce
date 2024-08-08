@@ -16,38 +16,38 @@ const User = require('./models/user');
 
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method'));
+// app.set('views', path.join(__dirname, 'views'));
+// app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.urlencoded({ extended: true }));
+// app.use(methodOverride('_method'));
 
 
 
-const sessionConfig = {
-    secret: 'weneedsomebettersecret',
-    resave: false,
-    saveUninitialized: true,
-    cookie:{
-        httpOnly: true,
-        // expires: Date.now() + 1000* 60 * 60 * 24 * 7,
-        maxAge:1000* 60 * 60 * 24 * 7 * 1
-    }
-}  
+// const sessionConfig = {
+//     secret: 'weneedsomebettersecret',
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie:{
+//         httpOnly: true,
+//         // expires: Date.now() + 1000* 60 * 60 * 24 * 7,
+//         maxAge:1000* 60 * 60 * 24 * 7 * 1
+//     }
+// }  
 
 
-app.use(session(sessionConfig));
-app.use(flash());
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(session(sessionConfig));
+// app.use(flash());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 
-//passport ke ander passport-locol-mongoose ka function bhej rha hu iske jaga apna be bhej sekta hu
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// //passport ke ander passport-locol-mongoose ka function bhej rha hu iske jaga apna be bhej sekta hu
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 
 
-//passport  check krega username and password using authenticate method provided by the passport-local-mongoose package
-passport.use(new LocalStrategy(User.authenticate())); 
+// //passport  check krega username and password using authenticate method provided by the passport-local-mongoose package
+// passport.use(new LocalStrategy(User.authenticate())); 
 
 
 // app.use((req, res, next) => {
