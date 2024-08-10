@@ -61,22 +61,21 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.get('/', (req, res) => {
-    res.send("hello ji");
-});
+// app.get('/', (req, res) => {
+//     res.send("hello ji");
+// });
 
-// Uncomment and define your routes here
-// const productRoutes = require('./routes/product');
-// const reviewRoutes = require('./routes/review');
-// const authRoutes = require('./routes/auth');
-// const apiRoutes = require('./routes/api');
-// const cartRoutes = require('./routes/cart');
+const productRoutes = require('./routes/product');
+const reviewRoutes = require('./routes/review');
+const authRoutes = require('./routes/auth');
+const apiRoutes = require('./routes/api');
+const cartRoutes = require('./routes/cart');
 
-// app.use(authRoutes);
-// app.use(productRoutes);
-// app.use(reviewRoutes);
-// app.use(apiRoutes);
-// app.use(cartRoutes);
+app.use(authRoutes);
+app.use(productRoutes);
+app.use(reviewRoutes);
+app.use(apiRoutes);
+app.use(cartRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
