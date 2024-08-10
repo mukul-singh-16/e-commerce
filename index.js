@@ -12,68 +12,68 @@ const User = require('./models/user');
 const MongoStore = require('connect-mongo');
 const dotenv=require('dotenv').config()
 
-// mongoose.connect(process.env.MONGODB_URI)
-//     .then(() => console.log('DB Connected'))
-//     .catch((err) => console.log(err));
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => console.log('DB Connected'))
+    .catch((err) => console.log(err));
 
-// app.engine('ejs', ejsMate);
-// app.set('view engine', 'ejs');
-// app.set('views', path.join(__dirname, 'views'));
-// app.use(express.static(path.join(__dirname, 'public')));
-// app.use(express.urlencoded({ extended: true }));
-// app.use(methodOverride('_method'));
-
-
-// const mongooseConnection = mongoose.connection;
+app.engine('ejs', ejsMate);
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
 
-
-// const sessionConfig = {
-//     secret: 'weneedsomebettersecret',
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie:{
-//         httpOnly: true,
-//         // expires: Date.now() + 1000* 60 * 60 * 24 * 7,
-//         maxAge:1000* 60 * 60 * 24 * 7 * 1
-//     },
-//     store: new MongoStore({ 
-//     mongoUrl: process.env.MONGODB_URI, 
-//     mongooseConnection,
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-//   }), // Use MongoDB to store sessions
-// }  
+const mongooseConnection = mongoose.connection;
 
 
-// app.use(session(sessionConfig));
-// app.use(flash());
-// app.use(passport.initialize());
-// app.use(passport.session());
+
+const sessionConfig = {
+    secret: 'weneedsomebettersecret',
+    resave: false,
+    saveUninitialized: true,
+    cookie:{
+        httpOnly: true,
+        // expires: Date.now() + 1000* 60 * 60 * 24 * 7,
+        maxAge:1000* 60 * 60 * 24 * 7 * 1
+    },
+    store: new MongoStore({ 
+    mongoUrl: process.env.MONGODB_URI, 
+    mongooseConnection,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }), // Use MongoDB to store sessions
+}  
 
 
-// // //passport ke ander passport-locol-mongoose ka function bhej rha hu iske jaga apna be bhej sekta hu
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
+app.use(session(sessionConfig));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 
-// // //passport  check krega username and password using authenticate method provided by the passport-local-mongoose package
-// passport.use(new LocalStrategy(User.authenticate())); 
+// passport ke ander passport-locol-mongoose ka function bhej rha hu iske jaga apna be bhej sekta hu
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 
-// app.use((req, res, next) => {
+// passport  check krega username and password using authenticate method provided by the passport-local-mongoose package
+passport.use(new LocalStrategy(User.authenticate())); 
+
+
+app.use((req, res, next) => {
     
-//     res.locals.currenturl='/products';
-//     res.locals.currentUser = req.user;
-//     res.locals.success = req.flash('success');
-//     res.locals.error = req.flash('error');
+    res.locals.currenturl='/products';
+    res.locals.currentUser = req.user;
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
 
-//     // console.log(res.locals.currentUser);
-//     next();
-// })
+    // console.log(res.locals.currentUser);
+    next();
+})
 
-// console.log("appjs wala middleware");
-// console.log(session);
+console.log("appjs wala middleware");
+console.log(session);
 
 // Routes
 
